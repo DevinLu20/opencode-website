@@ -1,0 +1,5 @@
+I used deepseek V4.1 Flash
+One prompt I used was to tell the agent to add Raising Cane's and El Jefe's Taqueria 
+One action the AI used was a shell call to scan for any credentials or unrelated files to use
+One issue was that there weren't as many restaurants as I liked, so I just added a couple like shown above
+An interaction in the website is the dark/light mode button, where on a click swaps the custom CSS property colors to change the theme
