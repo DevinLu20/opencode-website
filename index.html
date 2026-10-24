@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheap Eats Boston — a student's shortlist</title>
+  <meta name="description" content="Ten affordable Boston restaurants, filterable by budget and dietary need.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // Apply a saved theme (or the OS preference) before first paint, so there
+    // is no flash of the wrong colors. A blocked localStorage is harmless.
+    try {
+      var savedTheme = localStorage.getItem("boston-eats-theme");
+      if (savedTheme === "dark" || savedTheme === "light") {
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    } catch (error) {
+      /* Ignore: the page still works, just without a remembered theme. */
+    }
+  </script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="brand" href="#top">
+        Cheap Eats <span class="brand__place">Boston</span>
+      </a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+        </svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <span id="theme-toggle-label">Dark mode</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <p class="eyebrow">Boston · student budget</p>
+      <h1 id="hero-title">Good food, student prices.</h1>
+      <p class="lede">
+        Ten spots where a real meal still costs less than a textbook. Filter them
+        by what you can spend and what you can eat — no accounts, no delivery apps,
+        no ten-dollar fees.
+      </p>
+      <p class="hero__note">
+        Prices are ballpark ranges for a single person, not quotes. Menus and hours
+        change, so check before you make the trip.
+      </p>
+    </section>
+
+    <section class="section wrap" id="tiers" aria-labelledby="tiers-title">
+      <div class="section__head">
+        <h2 id="tiers-title">Three ways to eat</h2>
+        <p>
+          A rough guide to what your money buys. The tiers below match the filter
+          buttons further down the page.
+        </p>
+      </div>
+
+      <div class="tiers">
+        <article class="tier">
+          <p class="tier__range">Under $10</p>
+          <h3>Grab and go</h3>
+          <p>
+            Lunch between classes or dinner on the walk home. Counter service,
+            short menus, and food that travels well.
+          </p>
+          <p class="tier__examples">Look for: pizza slices, falafel wraps, cannoli.</p>
+        </article>
+
+        <article class="tier">
+          <p class="tier__range">$10–20</p>
+          <h3>Sit down or take out</h3>
+          <p>
+            The everyday tier: a burrito, a bowl of pho, or a proper plate of
+            vegetables with enough left for coffee.
+          </p>
+          <p class="tier__examples">Look for: burritos, noodle bowls, veggie plates.</p>
+        </article>
+
+        <article class="tier">
+          <p class="tier__range">$20–30</p>
+          <h3>Treat yourself</h3>
+          <p>
+            For a birthday, a visit from home, or the end of finals. Share plates
+            with friends to keep the bill near the bottom of the range.
+          </p>
+          <p class="tier__examples">Look for: small plates, pasta, dishes for the table.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section wrap" id="find" aria-labelledby="find-title">
+      <div class="section__head">
+        <h2 id="find-title">Find your plate</h2>
+        <p>
+          Pick a budget, a dietary need, or both. Click an active filter again to
+          turn it off, or use “Clear filters” to start over.
+        </p>
+      </div>
+
+      <div class="filters">
+        <div class="filter-group" role="group" aria-labelledby="budget-label">
+          <p class="filter-group__label" id="budget-label">Budget</p>
+          <div class="filter-group__buttons">
+            <button class="filter" type="button" data-filter="budget" data-value="under-10" aria-pressed="false">Under $10</button>
+            <button class="filter" type="button" data-filter="budget" data-value="10-20" aria-pressed="false">$10–20</button>
+            <button class="filter" type="button" data-filter="budget" data-value="20-30" aria-pressed="false">$20–30</button>
+          </div>
+        </div>
+
+        <div class="filter-group" role="group" aria-labelledby="diet-label">
+          <p class="filter-group__label" id="diet-label">Dietary need</p>
+          <div class="filter-group__buttons">
+            <button class="filter" type="button" data-filter="diet" data-value="vegetarian" aria-pressed="false">Vegetarian</button>
+            <button class="filter" type="button" data-filter="diet" data-value="vegan" aria-pressed="false">Vegan</button>
+            <button class="filter" type="button" data-filter="diet" data-value="gluten-free" aria-pressed="false">Gluten-free</button>
+          </div>
+        </div>
+
+        <button class="reset" id="filter-reset" type="button" disabled>Clear filters</button>
+      </div>
+
+      <p class="results" id="filter-count" role="status">Showing all 10 spots.</p>
+      <p class="empty" id="filter-empty" hidden>
+        No spots match that combination. Try clearing one filter — the under-$10
+        and gluten-free pair is the usual culprit.
+      </p>
+
+      <ul class="spots" id="spot-list">
+        <li class="spot" data-budget="under-10" data-diet="vegetarian">
+          <div class="spot__top">
+            <h3>Gene's Chinese Flatbread Cafe</h3>
+            <p class="spot__price">$6–9</p>
+          </div>
+          <p class="spot__where">Chinatown · cash only</p>
+          <p class="spot__note">
+            Hand-pulled noodles and cumin lamb flatbread. Tiny room, fast turnover,
+            and a line that looks worse than it is.
+          </p>
+          <ul class="tags" aria-label="Dietary options">
+            <li>Vegetarian options</li>
+          </ul>
+        </li>
+
+        <li class="spot" data-budget="under-10" data-diet="vegetarian">
+          <div class="spot__top">
+            <h3>Mike's Pastry</h3>
+            <p class="spot__price">$5–8</p>
+          </div>
+          <p class="spot__where">North End · cash preferred</p>
+          <p class="spot__note">
+            Cannoli and a coffee can count as dinner if you commit to it. Grab a box
+            for the group and skip the sit-down places on Hanover Street.
+          </p>
+          <ul class="tags" aria-label="Dietary options">
+            <li>Vegetarian</li>
+          </ul>
+        </li>
+
+        <li class="spot" data-budget="under-10" data-diet="vegetarian vegan">
+          <div class="spot__top">
+            <h3>Falafel King</h3>
+            <p class="spot__price">$7–10</p>
+          </div>
+          <p class="spot__where">Downtown Crossing · counter service</p>
+          <p class="spot__note">
+            A falafel wrap with everything, plus free pickles while you wait. The
+            lunch rush is real, so go at 11:30 or after 2.
+          </p>
+          <ul class="tags" aria-label="Dietary options">
+            <li>Vegetarian</li>
+            <li>Vegan</li>
+          </ul>
+        </li>
+
+        <li class="spot" data-budget="10-20" data-diet="vegetarian gluten-free">
+          <div class="spot__top">
+            <h3>Anna's Taqueria</h3>
+            <p class="spot__price">$10–14</p>
+          </div>
+          <p class="spot__where">Allston · counter service</p>
+          <p class="spot__note">
+            Burritos the size of your forearm. Rice bowls and vegetarian options are
+            on the board; ask them to hold the dairy if you need it dairy-free.
+          </p>
+          <ul class="tags" aria-label="Dietary options">
+            <li>Vegetarian</li>
+            <li>Gluten-free options</li>
+          </ul>
+        </li>
+
+        <li class="spot" data-budget="10-20" data-diet="vegetarian vegan gluten-free">
+          <div class="spot__top">
+            <h3>El Jefe's Taqueria</h3>
+            <p class="spot__price">$10–15</p>
+          </div>
+          <p class="spot__where">Kenmore Square · open late</p>
+          <p class="spot__note">
+            Burritos, bowls, and tacos with no upcharge for guac or queso. Vegan
+            chicken, vegetarian fillings, and gluten-free bowls are all on the board,
+            and the doors stay open until 3 a.m.
+          </p>
+          <ul class="tags" aria-label="Dietary options">
+            <li>Vegetarian</li>
+            <li>Vegan</li>
+            <li>Gluten-free options</li>
+          </ul>
+        </li>
+
+        <li class="spot" data-budget="10-20" data-diet="vegetarian">
+          <div class="spot__top">
+            <h3>Tasty Burger</h3>
+            <p class="spot__price">$10–15</p>
+          </div>
+          <p class="spot__where">Fenway · late-night window</p>
+          <p class="spot__note">
+            A veggie burger and fries near the ballpark without the ballpark markup.
+            Loud, bright, and open when the dining halls are not.
+          </p>
+          <ul class="tags" aria-label="Dietary options">
+            <li>Vegetarian</li>
+          </ul>
+        </li>
+
+        <li class="spot" data-budget="10-20" data-diet="vegetarian">
+          <div class="spot__top">
+            <h3>Raising Cane's</h3>
+            <p class="spot__price">$10–16</p>
+          </div>
+          <p class="spot__where">BU / Allston · 949 Commonwealth Ave</p>
+          <p class="spot__note">
+            Chicken fingers, crinkle-cut fries, and Texas toast. The Box Combo is the
+            sweet spot; there is no meatless main, but the fries, toast, and coleslaw
+            are vegetarian.
+          </p>
+          <ul class="tags" aria-label="Dietary options">
+            <li>Vegetarian sides</li>
+          </ul>
+        </li>
+
+        <li class="spot" data-budget="10-20" data-diet="vegetarian vegan gluten-free">
+          <div class="spot__top">
+            <h3>Clover Food Lab</h3>
+            <p class="spot__price">$10–18</p>
+          </div>
+          <p class="spot__where">Back Bay · counter service</p>
+          <p class="spot__note">
+            Chickpea fritter sandwiches and seasonal plates. Order at the counter;
+            most of the menu is vegan and the staff know the ingredients well.
+          </p>
+          <ul class="tags" aria-label="Dietary options">
+            <li>Vegetarian</li>
+            <li>Vegan</li>
+            <li>Gluten-free options</li>
+          </ul>
+        </li>
+
+        <li class="spot" data-budget="20-30" data-diet="vegetarian gluten-free">
+          <div class="spot__top">
+            <h3>Myers + Chang</h3>
+            <p class="spot__price">$20–28</p>
+          </div>
+          <p class="spot__where">South End · dinner</p>
+          <p class="spot__note">
+            Shareable Taiwanese-leaning small plates. Go with two friends, split
+            three dishes, and the bill lands near the bottom of the range.
+          </p>
+          <ul class="tags" aria-label="Dietary options">
+            <li>Vegetarian</li>
+            <li>Gluten-free options</li>
+          </ul>
+        </li>
+
+        <li class="spot" data-budget="20-30" data-diet="vegetarian">
+          <div class="spot__top">
+            <h3>Coppa</h3>
+            <p class="spot__price">$22–30</p>
+          </div>
+          <p class="spot__where">South End · enoteca</p>
+          <p class="spot__note">
+            Pastas and small plates in a snug room. Sit at the bar, order two plates,
+            and call it a celebration without the tasting-menu price.
+          </p>
+          <ul class="tags" aria-label="Dietary options">
+            <li>Vegetarian</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>
+        <strong>Sample content for a learning project.</strong> Prices, hours, and
+        menus were not verified and will change. Dietary tags mean options are
+        usually available, not that a kitchen is allergen-free — ask about
+        cross-contact if it matters.
+      </p>
+      <p class="site-footer__meta">Hand-written HTML, CSS, and JavaScript · October 2026</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
